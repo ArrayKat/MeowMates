@@ -1,4 +1,4 @@
-package com.example.meowmates.ui.theme
+package com.example.meowmates.view.ui.theme
 
 import android.app.Activity
 import android.os.Build

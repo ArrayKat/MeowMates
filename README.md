@@ -5,10 +5,10 @@
 
 ## Установка
 1. Склонировать проект
-   
-    ```bash
+  
+```bash
     git clone http://gogs.ngknn.ru:3000/ArrayKat2/QuantumComputers.
-    ```
+```
 
 2. Открыть проект в Android Stusio
 3. Собрать проект на вашем мобильном устройстве
@@ -28,6 +28,9 @@
 2. [Выбор паттерна проектирования и ПО для реализации](docs/RU/Ru_select_patterns.md)
 3. [Макет приложения](https://www.figma.com/design/w2HXW4Iq7LtwhHI8sro678/Meow-mates?node-id=0-1&t=0rYx47I1bDPCDiXO-1)
 4. [Описание серверной части приложения](docs/RU/Ru_server_part.md)
+5. [Тест-план](docs/RU/Ru_server_part.md)
+6. [Тестовый набор](docs/RU/Ru_server_part.md)
+7. [Тест-кейс](docs/RU/Ru_server_part.md)
 
 
 ## Автор
