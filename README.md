@@ -25,13 +25,13 @@
 
 ## Документация
 1. [Техническое задание](docs/RU/Техническое%20задание.docx)
-2. [Выбор паттерна проектирования и ПО для реализации](docs/RU/Ru_select_patterns.md)
+2. [Выбор паттерна проектирования и ПО для реализации](docs/RU/PatternAndSoftware.md)
 3. [Макет приложения](https://www.figma.com/design/w2HXW4Iq7LtwhHI8sro678/Meow-mates?node-id=0-1&t=0rYx47I1bDPCDiXO-1)
 4. [Описание серверной части приложения](docs/RU/Ru_server_part.md)
-5. [Тест-план](docs/RU/Ru_server_part.md)
-6. [Тестовый набор](docs/RU/Ru_server_part.md)
-7. [Тест-кейс](docs/RU/Ru_server_part.md)
+5. [Тестовая документация серверной части](docs/RU/test-plan.md)
 
+## Пояснение реализации приложения
+1. [Подключение библиотек, библиотека Hilt](docs/RU/Добавление%20hilt.md)
 
 ## Автор
 [Gogs](http://gogs.ngknn.ru:3000/ArrayKat2)
