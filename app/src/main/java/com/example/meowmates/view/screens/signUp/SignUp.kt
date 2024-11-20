@@ -69,8 +69,8 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp, horizontal = 20.dp)
-                        .background(MeowMatesTheme.colors.container),
-                    placeholder = { Text("Фамилия", color = MeowMatesTheme.colors.inversionText, style = MeowMatesTheme.fonts.textWatermark) },
+                        .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
+                    placeholder = { Text("Фамилия", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
                     value = viewModel.email.value,
                     onValueChange = {viewModel.email.value = it},
                     shape = RoundedCornerShape(10.dp)
@@ -80,8 +80,18 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp, horizontal = 20.dp)
-                        .background(MeowMatesTheme.colors.container),
-                    placeholder = { Text("Имя", color = MeowMatesTheme.colors.inversionText, style = MeowMatesTheme.fonts.textWatermark) },
+                        .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
+                    placeholder = { Text("Имя", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
+                    value = "",
+                    onValueChange = {},
+                    shape = RoundedCornerShape(10.dp)
+                )
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 10.dp, horizontal = 20.dp)
+                        .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
+                    placeholder = { Text("Отчество", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
                     value = "",
                     onValueChange = {},
                     shape = RoundedCornerShape(10.dp)
@@ -91,19 +101,8 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp, horizontal = 20.dp)
-                        .background(MeowMatesTheme.colors.container),
-                    placeholder = { Text("Отчество", color = MeowMatesTheme.colors.inversionText, style = MeowMatesTheme.fonts.textWatermark) },
-                    value = "",
-                    onValueChange = {},
-                    shape = RoundedCornerShape(10.dp)
-                )
-
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 10.dp, horizontal = 20.dp)
-                        .background(MeowMatesTheme.colors.container),
-                    placeholder = { Text("Телефон", color = MeowMatesTheme.colors.inversionText, style = MeowMatesTheme.fonts.textWatermark) },
+                        .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
+                    placeholder = { Text("Телефон", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
                     value = "",
                     onValueChange = {},
                     shape = RoundedCornerShape(10.dp)
@@ -112,8 +111,8 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp, horizontal = 20.dp)
-                        .background(MeowMatesTheme.colors.container),
-                    placeholder = { Text("Дата рождения", color = MeowMatesTheme.colors.inversionText, style = MeowMatesTheme.fonts.textWatermark) },
+                        .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
+                    placeholder = { Text("Дата рождения", color = MeowMatesTheme.colors.text , style = MeowMatesTheme.fonts.textWatermark) },
                     value = "",
                     onValueChange = {},
                     shape = RoundedCornerShape(10.dp)
@@ -122,8 +121,8 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp, horizontal = 20.dp)
-                        .background(MeowMatesTheme.colors.container),
-                    placeholder = { Text("Почта", color = MeowMatesTheme.colors.inversionText, style = MeowMatesTheme.fonts.textWatermark) },
+                        .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
+                    placeholder = { Text("Почта", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
                     value = "",
                     onValueChange = {},
                     shape = RoundedCornerShape(10.dp)
@@ -132,13 +131,12 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp, horizontal = 20.dp)
-                        .background(MeowMatesTheme.colors.container),
-                    placeholder = { Text("Пароль", color = MeowMatesTheme.colors.inversionText, style = MeowMatesTheme.fonts.textWatermark) },
+                        .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
+                    placeholder = { Text("Пароль", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
                     value = "",
                     onValueChange = {},
                     shape = RoundedCornerShape(10.dp)
                 )
-
                 Button(
                     onClick={ /* Действие при нажатии на кнопку */ },
                     modifier=Modifier

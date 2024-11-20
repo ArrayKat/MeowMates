@@ -6,5 +6,4 @@ plugins {
     id ("org.jetbrains.kotlin.plugin.serialization") version "1.8.20"
 
     alias(libs.plugins.compose.compiler) apply false
-
 }

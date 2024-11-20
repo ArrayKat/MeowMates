@@ -17,7 +17,7 @@ import com.example.meowmates.view.screens.splash.Splash
 fun Navigation(controller: NavHostController, isVisibleBar: MutableState<Boolean>) {
     NavHost(
         navController = controller,
-        startDestination = NavigationRoutes.SIGNUP
+        startDestination = NavigationRoutes.LOGIN
     ) {
         composable(NavigationRoutes.SPLASH) {
             isVisibleBar.value = false
