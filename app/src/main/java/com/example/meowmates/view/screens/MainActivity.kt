@@ -16,8 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.example.meowmates.domain.utils.PrefManager
 import com.example.meowmates.view.bottombar.BottomBar
 import com.example.meowmates.view.navigation.Navigation
 import com.example.meowmates.view.ui.theme.MeowMatesTheme
@@ -31,6 +33,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            PrefManager.init(LocalContext.current)
             val controller = rememberNavController()
             val isVisibleBottomBar = remember { mutableStateOf(false) }
             MeowMatesTheme(

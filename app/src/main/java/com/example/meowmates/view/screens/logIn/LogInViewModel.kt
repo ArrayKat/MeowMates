@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.example.meowmates.domain.utils.Constants
+import com.example.meowmates.domain.utils.PrefManager.currentUser
 import com.example.meowmates.view.navigation.NavigationRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.jan.supabase.auth.auth
@@ -36,15 +37,17 @@ class LogInViewModel @Inject constructor(): ViewModel(){
                     email = emailUser.value
                     password = passwordUser.value
                 }
-                Log.d("sign up","Success")
+                currentUser = Constants.supabase.auth.currentUserOrNull()?.id
+                Log.d("log in","Success")
+                Log.d("log in", currentUser.toString())
                 controller.navigate(NavigationRoutes.HOME){
-                    popUpTo(NavigationRoutes.SIGNUP){
+                    popUpTo(NavigationRoutes.LOGIN){
                         inclusive = true
                     }
                 }
             }
             catch(e:Exception){
-                Log.d("sign up",e.message.toString())
+                Log.d("log in",e.message.toString())
             }
         }
     }

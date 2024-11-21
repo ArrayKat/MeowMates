@@ -1,8 +1,7 @@
-package com.example.meowmates.model
+package com.example.meowmates.model.database
 
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.serialization.Serializable
-import java.sql.Date
 
 @Serializable
 data class messages (

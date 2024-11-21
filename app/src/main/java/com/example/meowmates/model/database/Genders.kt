@@ -1,4 +1,4 @@
-package com.example.meowmates.model
+package com.example.meowmates.model.database
 
 import kotlinx.serialization.Serializable
 

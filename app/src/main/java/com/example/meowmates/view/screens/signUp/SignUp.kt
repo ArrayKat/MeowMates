@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -71,9 +72,15 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
                     placeholder = { Text("Фамилия", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
-                    value = viewModel.email.value,
-                    onValueChange = {viewModel.email.value = it},
-                    shape = RoundedCornerShape(10.dp)
+                    value = viewModel.surname.value,
+                    onValueChange = {newSurname -> viewModel.surname.value = newSurname},
+                    shape = RoundedCornerShape(10.dp),
+                    textStyle = TextStyle( // Задаем цвет и стиль текста здесь
+                        color = MeowMatesTheme.colors.text, // Цвет текста при вводе
+                        fontFamily = MeowMatesTheme.fonts.textWatermark.fontFamily, // Шрифт
+                        fontWeight = MeowMatesTheme.fonts.textWatermark.fontWeight, // Жирность шрифта
+                        fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
+                    ),
                 )
 
                 OutlinedTextField(
@@ -82,9 +89,15 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
                     placeholder = { Text("Имя", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
-                    value = "",
-                    onValueChange = {},
-                    shape = RoundedCornerShape(10.dp)
+                    value = viewModel.name.value,
+                    onValueChange = {newStr -> viewModel.name.value = newStr},
+                    shape = RoundedCornerShape(10.dp),
+                    textStyle = TextStyle( // Задаем цвет и стиль текста здесь
+                        color = MeowMatesTheme.colors.text, // Цвет текста при вводе
+                        fontFamily = MeowMatesTheme.fonts.textWatermark.fontFamily, // Шрифт
+                        fontWeight = MeowMatesTheme.fonts.textWatermark.fontWeight, // Жирность шрифта
+                        fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
+                    ),
                 )
                 OutlinedTextField(
                     modifier = Modifier
@@ -92,9 +105,15 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
                     placeholder = { Text("Отчество", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
-                    value = "",
-                    onValueChange = {},
-                    shape = RoundedCornerShape(10.dp)
+                    value = viewModel.patro.value,
+                    onValueChange = {newStr -> viewModel.patro.value = newStr},
+                    shape = RoundedCornerShape(10.dp),
+                    textStyle = TextStyle( // Задаем цвет и стиль текста здесь
+                        color = MeowMatesTheme.colors.text, // Цвет текста при вводе
+                        fontFamily = MeowMatesTheme.fonts.textWatermark.fontFamily, // Шрифт
+                        fontWeight = MeowMatesTheme.fonts.textWatermark.fontWeight, // Жирность шрифта
+                        fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
+                    ),
                 )
 
                 OutlinedTextField(
@@ -103,9 +122,15 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
                     placeholder = { Text("Телефон", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
-                    value = "",
-                    onValueChange = {},
-                    shape = RoundedCornerShape(10.dp)
+                    value = viewModel.telephone.value,
+                    onValueChange = {newStr -> viewModel.telephone.value = newStr},
+                    shape = RoundedCornerShape(10.dp),
+                    textStyle = TextStyle( // Задаем цвет и стиль текста здесь
+                        color = MeowMatesTheme.colors.text, // Цвет текста при вводе
+                        fontFamily = MeowMatesTheme.fonts.textWatermark.fontFamily, // Шрифт
+                        fontWeight = MeowMatesTheme.fonts.textWatermark.fontWeight, // Жирность шрифта
+                        fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
+                    ),
                 )
                 OutlinedTextField(
                     modifier = Modifier
@@ -113,9 +138,15 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
                     placeholder = { Text("Дата рождения", color = MeowMatesTheme.colors.text , style = MeowMatesTheme.fonts.textWatermark) },
-                    value = "",
-                    onValueChange = {},
-                    shape = RoundedCornerShape(10.dp)
+                    value = viewModel.birthdate.value,
+                    onValueChange = {newStr -> viewModel.birthdate.value = newStr},
+                    shape = RoundedCornerShape(10.dp),
+                    textStyle = TextStyle( // Задаем цвет и стиль текста здесь
+                        color = MeowMatesTheme.colors.text, // Цвет текста при вводе
+                        fontFamily = MeowMatesTheme.fonts.textWatermark.fontFamily, // Шрифт
+                        fontWeight = MeowMatesTheme.fonts.textWatermark.fontWeight, // Жирность шрифта
+                        fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
+                    ),
                 )
                 OutlinedTextField(
                     modifier = Modifier
@@ -123,9 +154,15 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
                     placeholder = { Text("Почта", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
-                    value = "",
-                    onValueChange = {},
-                    shape = RoundedCornerShape(10.dp)
+                    value = viewModel.emailUser.value,
+                    onValueChange = {newStr -> viewModel.emailUser.value = newStr},
+                    shape = RoundedCornerShape(10.dp),
+                    textStyle = TextStyle( // Задаем цвет и стиль текста здесь
+                        color = MeowMatesTheme.colors.text, // Цвет текста при вводе
+                        fontFamily = MeowMatesTheme.fonts.textWatermark.fontFamily, // Шрифт
+                        fontWeight = MeowMatesTheme.fonts.textWatermark.fontWeight, // Жирность шрифта
+                        fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
+                    ),
                 )
                 OutlinedTextField(
                     modifier = Modifier
@@ -133,12 +170,18 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
                     placeholder = { Text("Пароль", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
-                    value = "",
-                    onValueChange = {},
-                    shape = RoundedCornerShape(10.dp)
+                    value = viewModel.passwordUser.value,
+                    onValueChange = {newStr -> viewModel.passwordUser.value = newStr},
+                    shape = RoundedCornerShape(10.dp),
+                    textStyle = TextStyle( // Задаем цвет и стиль текста здесь
+                        color = MeowMatesTheme.colors.text, // Цвет текста при вводе
+                        fontFamily = MeowMatesTheme.fonts.textWatermark.fontFamily, // Шрифт
+                        fontWeight = MeowMatesTheme.fonts.textWatermark.fontWeight, // Жирность шрифта
+                        fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
+                    ),
                 )
                 Button(
-                    onClick={ /* Действие при нажатии на кнопку */ },
+                    onClick={ viewModel.signUp(navHostController) },
                     modifier=Modifier
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .fillMaxWidth() // Занять всю ширину, как текстовые поля

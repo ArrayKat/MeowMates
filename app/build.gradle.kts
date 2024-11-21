@@ -91,6 +91,8 @@ dependencies {
 
     //supabase ktor
     implementation("io.ktor:ktor-client-android:3.0.0")
+    implementation ("io.ktor:ktor-client-core: 3.0.0")
+    implementation ("io.ktor:ktor-utils: 3.0.0")
     //coil - для вывода изображений по url
     implementation("io.coil-kt:coil-compose:2.0.0")
 }
