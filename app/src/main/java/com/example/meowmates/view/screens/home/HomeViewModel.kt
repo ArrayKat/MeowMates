@@ -14,7 +14,13 @@ import com.example.meowmates.model.database.Cats
 import com.example.meowmates.model.database.UserFavoriteCat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.realtime.PostgresAction
+import io.github.jan.supabase.realtime.channel
+import io.github.jan.supabase.realtime.postgresChangeFlow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @HiltViewModel
@@ -92,6 +98,36 @@ class HomeViewModel @Inject constructor():ViewModel() {
             }
         }
     }
+    fun realtimeHome(scope: CoroutineScope){
+        viewModelScope.launch {
+            try{
+                val channel = Constants.supabase.channel("user_favorite_cats")
+                val dataFlow = channel.postgresChangeFlow<PostgresAction>(schema = "public")
 
+                dataFlow.onEach {
+                    when(it){
+                        is PostgresAction.Delete -> {
+                            val stringData = it.oldRecord.toString()
+                            Log.d("HomeView-realtime", "Удаленные данные: "+stringData)
+                            val data = Json.decodeFromString<UserFavoriteCat>(stringData)
+                            GetComponent()
+                        }
+                        is PostgresAction.Insert -> {
+                            val stringData = it.record.toString()
+                            Log.d("HomeView-realtime", "Добавленные данные: "+stringData)
+                            val data = Json.decodeFromString<UserFavoriteCat>(stringData)
+                            GetComponent()
+                        }
+                        is PostgresAction.Select -> TODO()
+                        is PostgresAction.Update -> TODO()
+                    }
+                }
+            }
+            catch (e:Exception){
+                Log.d("HomeVM - realtime", "ERROR")
+            }
+        }
+
+    }
 
 }

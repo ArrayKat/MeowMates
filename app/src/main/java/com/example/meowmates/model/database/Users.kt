@@ -9,6 +9,7 @@ data class Users (
     val surname: String ="",
     val name: String ="",
     val patronymic:String="",
-    val birthday:String ="",
-    val image_url: String=""
+    val birthday:String? = "",
+    val image_url: String? ="",
+    val telephone: String? =""
 )

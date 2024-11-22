@@ -9,7 +9,7 @@ import com.example.meowmates.view.screens.favorites.Favorites
 import com.example.meowmates.view.screens.home.Home
 import com.example.meowmates.view.screens.logIn.LogIn
 import com.example.meowmates.view.screens.message.Message
-import com.example.meowmates.view.screens.profile.Profile
+import com.example.meowmates.view.screens.profile.main.Profile
 import com.example.meowmates.view.screens.signUp.SignUp
 import com.example.meowmates.view.screens.splash.Splash
 

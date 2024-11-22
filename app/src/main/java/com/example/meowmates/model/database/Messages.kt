@@ -4,7 +4,7 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class messages (
+data class Msessages (
     val id: Int = 0,
     val text: String ="",
     val send_date: DateTimeUnit.DateBased,
