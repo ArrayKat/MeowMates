@@ -1,5 +1,6 @@
 package com.example.meowmates.view.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,8 +17,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,19 +31,23 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.example.meowmates.R
 import com.example.meowmates.model.customModel.CustomCats
-import com.example.meowmates.view.MainViewModel
-import com.example.meowmates.view.screens.profile.main.ProfileViewModel
+import com.example.meowmates.view.navigation.NavigationRoutes
+import com.example.meowmates.view.screens.profile.cat.CatProfile
+import com.example.meowmates.view.screens.profile.cat.CatProfileViewModel
+import com.example.meowmates.view.screens.profile.main.MainProfileViewModel
 import com.example.meowmates.view.ui.theme.MeowMatesTheme
+import io.ktor.client.plugins.convertLongTimeoutToIntWithInfiniteAsZero
 
 
 @Composable
-fun MyCatCard(cat: CustomCats, viewModel: ProfileViewModel = hiltViewModel()) {
+fun MyCatCard(cat: CustomCats,controller: NavHostController, viewModel: CatProfileViewModel= hiltViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -115,11 +122,17 @@ fun MyCatCard(cat: CustomCats, viewModel: ProfileViewModel = hiltViewModel()) {
                 )
             }
 
-            // Иконка "Избранное"
+            // Иконка "Изменить"
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.edit_icon),
-                contentDescription = "Добавить в избранное",
-                modifier = Modifier.size(40.dp).padding(end = 16.dp, top = 16.dp).clickable {},
+                contentDescription = "Изменить",
+                modifier = Modifier.size(40.dp).padding(end = 16.dp, top = 16.dp).clickable {
+                   controller.navigate(NavigationRoutes.CATPROFILE + "/${cat.id}"){
+                       popUpTo(NavigationRoutes.MAINPROFILE){
+                           inclusive = true
+                       }
+                   }
+                },
                 tint = MeowMatesTheme.colors.activIcon,
             )
 

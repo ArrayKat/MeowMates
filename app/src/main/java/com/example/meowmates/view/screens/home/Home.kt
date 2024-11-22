@@ -60,13 +60,6 @@ fun Home(navHostController: NavHostController, viewModel: HomeViewModel = hiltVi
             .background(MeowMatesTheme.colors.background)
             .fillMaxSize()
     ) {
-        Text(
-            text = "Home Screen",
-            fontSize = 20.sp,
-            color = MeowMatesTheme.colors.text,
-            modifier = Modifier.padding(20.dp)
-        )
-
         LazyColumn(modifier = Modifier.padding( bottom = 100.dp, start = 16.dp, end = 16.dp, top = 50.dp )) {
             items(cats) { cat ->
                 CatCard(cat)

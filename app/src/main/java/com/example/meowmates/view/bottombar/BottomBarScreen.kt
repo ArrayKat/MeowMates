@@ -9,7 +9,7 @@ sealed class BottomBarScreen(
 ){
 
     object Profile:BottomBarScreen(
-        route = NavigationRoutes.PROFILE,
+        route = NavigationRoutes.MAINPROFILE,
         icon = R.drawable.profile_icon
     )
     object Home:BottomBarScreen(

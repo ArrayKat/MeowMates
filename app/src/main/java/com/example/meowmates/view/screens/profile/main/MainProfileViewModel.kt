@@ -1,10 +1,10 @@
 package com.example.meowmates.view.screens.profile.main
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import com.example.meowmates.domain.utils.Constants
 import com.example.meowmates.domain.utils.PrefManager.currentUser
 import com.example.meowmates.model.customModel.CustomCats
@@ -12,15 +12,35 @@ import com.example.meowmates.model.database.Breeds
 import com.example.meowmates.model.database.Cats
 import com.example.meowmates.model.database.UserCats
 import com.example.meowmates.model.database.Users
+import com.example.meowmates.view.navigation.NavigationRoutes
+import com.example.meowmates.view.screens.profile.cat.CatProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor():ViewModel() {
+class MainProfileViewModel @Inject constructor():ViewModel() {
     var User = mutableStateOf<Users?>(null)
     var catList = mutableStateOf<List<CustomCats>>(emptyList())
+    fun navigateToCatProfile(controller:NavHostController, idCat: Int){
+
+
+    }
+    fun navigateToMyProfile(controller:NavHostController){
+        controller.navigate(NavigationRoutes.MYPROFILE) {
+            popUpTo(NavigationRoutes.MAINPROFILE){
+                inclusive = true;
+            }
+        }
+    }
+    fun navigateToLogIn(controller:NavHostController){
+        controller.navigate(NavigationRoutes.LOGIN) {
+            popUpTo(NavigationRoutes.MAINPROFILE){
+                inclusive = true;
+            }
+        }
+    }
     fun GetData(){
         viewModelScope.launch {
             try{

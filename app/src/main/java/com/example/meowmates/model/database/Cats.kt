@@ -4,12 +4,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Cats (
-    val id: Int =0,
-    val name_cat: String = "",
-    val gender_id: Int =0,
-    val age: Int=0,
-    val breed_id: Int=0,
-    val weight: Int = 0,
-    val description_cats: String ="",
-    val image_url: String=""
+    var id: Int =0,
+    var name_cat: String = "",
+    var gender_id: Int =0,
+    var age: Int=0,
+    var breed_id: Int=0,
+    var weight: Int = 0,
+    var description_cats: String ="",
+    var image_url: String=""
 )

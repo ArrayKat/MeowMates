@@ -47,11 +47,12 @@ import coil.size.Size
 import com.example.meowmates.R
 import com.example.meowmates.view.components.CatCard
 import com.example.meowmates.view.components.MyCatCard
+import com.example.meowmates.view.navigation.NavigationRoutes
 import com.example.meowmates.view.ui.theme.MeowMatesTheme
 
 
 @Composable
-fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = hiltViewModel()) {
+fun MainProfile(controller: NavHostController, viewModel: MainProfileViewModel = hiltViewModel()) {
     LazyColumn(
         modifier = Modifier
             .background(MeowMatesTheme.colors.background)
@@ -126,7 +127,7 @@ fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = 
 
         item {
             Button(
-                onClick={ /* Действие при нажатии */ },
+                onClick={ viewModel.navigateToMyProfile(controller) },
                 modifier=Modifier
                     .padding(vertical = 10.dp)
                     .fillMaxWidth() // Занять всю ширину
@@ -156,7 +157,7 @@ fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = 
 
         item {
             Button(
-                onClick={ /* Действие при нажатии */ },
+                onClick={ viewModel.navigateToLogIn(controller) },
                 modifier=Modifier
                     .padding(vertical=10.dp)
                     .fillMaxWidth() // Занять всю ширину
@@ -195,12 +196,18 @@ fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = 
         }
 
         items(viewModel.catList.value) { cat ->
-            MyCatCard(cat) // Отображаем карточки котов пользователя
+            MyCatCard(cat,controller) // Отображаем карточки котов пользователя
         }
 
         item {
             Button(
-                onClick={  },
+                onClick={
+                    controller.navigate(NavigationRoutes.CATPROFILE + "/${0}"){
+                        popUpTo(NavigationRoutes.MAINPROFILE){
+                            inclusive = true
+                        }
+                    }
+                },
                 modifier=Modifier
                     .padding(vertical = 10.dp)
                     .fillMaxWidth() // Занять всю ширину, как текстовые поля

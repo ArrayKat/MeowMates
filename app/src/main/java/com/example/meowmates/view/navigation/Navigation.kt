@@ -9,7 +9,9 @@ import com.example.meowmates.view.screens.favorites.Favorites
 import com.example.meowmates.view.screens.home.Home
 import com.example.meowmates.view.screens.logIn.LogIn
 import com.example.meowmates.view.screens.message.Message
-import com.example.meowmates.view.screens.profile.main.Profile
+import com.example.meowmates.view.screens.profile.cat.CatProfile
+import com.example.meowmates.view.screens.profile.main.MainProfile
+import com.example.meowmates.view.screens.profile.people.MyProfile
 import com.example.meowmates.view.screens.signUp.SignUp
 import com.example.meowmates.view.screens.splash.Splash
 
@@ -31,9 +33,20 @@ fun Navigation(controller: NavHostController, isVisibleBar: MutableState<Boolean
             isVisibleBar.value = false
             LogIn(controller)
         }
-        composable(NavigationRoutes.PROFILE) {
+        composable(NavigationRoutes.MAINPROFILE) {
             isVisibleBar.value = true
-            Profile(controller)
+            MainProfile(controller)
+        }
+        composable(NavigationRoutes.MYPROFILE) {
+            isVisibleBar.value = true
+            MyProfile(controller)
+        }
+        composable(NavigationRoutes.CATPROFILE + "/{idCat}") {
+            backStackEntry ->
+            val idStr = backStackEntry.arguments?.getString("idCat") ?: ""
+            val id: Int = idStr.toInt()
+            isVisibleBar.value = true
+            CatProfile(controller, id)
         }
         composable(NavigationRoutes.HOME) {
             isVisibleBar.value = true

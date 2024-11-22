@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Users (
-    val id: String = "",
-    val surname: String ="",
-    val name: String ="",
-    val patronymic:String="",
-    val birthday:String? = "",
-    val image_url: String? ="",
-    val telephone: String? =""
+    var id: String = "",
+    var surname: String ="",
+    var name: String ="",
+    var patronymic:String="",
+    var birthday:String? = "",
+    var image_url: String? ="",
+    var telephone: String? =""
 )
