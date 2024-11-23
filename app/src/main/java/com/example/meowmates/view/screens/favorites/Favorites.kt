@@ -20,21 +20,27 @@ import com.example.meowmates.view.ui.theme.MeowMatesTheme
 fun Favorites (navHostController: NavHostController, viewModel: FavoritesViewModel = hiltViewModel()) {
 
     val cats = viewModel.catsList.value
+    viewModel.GetComponent()
     Box(
         modifier = Modifier
             .background(MeowMatesTheme.colors.background)
             .fillMaxSize()
     ) {
-        Text(
-            text = "Home Screen",
-            fontSize = 20.sp,
-            color = MeowMatesTheme.colors.text,
-            modifier = Modifier.padding(20.dp)
-        )
-
         LazyColumn(modifier = Modifier.padding( bottom = 100.dp, start = 16.dp, end = 16.dp, top = 50.dp )) {
-            items(cats) { cat ->
-                CatCard(cat)
+            if(cats.isEmpty()){
+                item {
+                    Text(
+                        text = "Список классных котов пуст",
+                        fontSize = 20.sp,
+                        color = MeowMatesTheme.colors.text,
+                        modifier = Modifier.padding(20.dp)
+                    )
+                }
+            }
+            else {
+                items(cats) { cat ->
+                    CatCard(cat)
+                }
             }
         }
     }

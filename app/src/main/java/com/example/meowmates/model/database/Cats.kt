@@ -11,5 +11,5 @@ data class Cats (
     var breed_id: Int=0,
     var weight: Int = 0,
     var description_cats: String ="",
-    var image_url: String=""
+    var image_url: String =""
 )

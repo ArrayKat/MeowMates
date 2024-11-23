@@ -196,17 +196,13 @@ fun MainProfile(controller: NavHostController, viewModel: MainProfileViewModel =
         }
 
         items(viewModel.catList.value) { cat ->
-            MyCatCard(cat,controller) // Отображаем карточки котов пользователя
+            MyCatCard(cat,cat.id,controller) // Отображаем карточки котов пользователя
         }
 
         item {
             Button(
                 onClick={
-                    controller.navigate(NavigationRoutes.CATPROFILE + "/${0}"){
-                        popUpTo(NavigationRoutes.MAINPROFILE){
-                            inclusive = true
-                        }
-                    }
+                    controller.navigate(NavigationRoutes.CATPROFILE + "/${0}")
                 },
                 modifier=Modifier
                     .padding(vertical = 10.dp)

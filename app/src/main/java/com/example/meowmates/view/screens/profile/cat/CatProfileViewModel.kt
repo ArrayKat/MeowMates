@@ -22,18 +22,19 @@ class CatProfileViewModel @Inject constructor(): ViewModel() {
     var currentIdCat = mutableStateOf(0)
     val name = mutableStateOf("")
     val gender = mutableStateOf("")
-    val age= mutableStateOf("")
+    val age = mutableStateOf("")
     val breed = mutableStateOf("")
     val weight = mutableStateOf("")
     val descriptor = mutableStateOf("")
     val image_url = mutableStateOf("")
 
 
-    fun GetCat(){
+    fun GetCat() {
         viewModelScope.launch {
 
-            if(currentIdCat.value!=0){
-                var cat = Constants.supabase.from("cats").select{ filter { eq("id",currentIdCat.value) } }.decodeSingle<Cats>()
+            if (currentIdCat.value != 0) {
+                var cat = Constants.supabase.from("cats")
+                    .select { filter { eq("id", currentIdCat.value) } }.decodeSingle<Cats>()
                 Log.d("CatProfileVM", "Получили кота, юхуууу")
                 name.value = cat.name_cat
                 gender.value = cat.gender_id.toString()
@@ -42,15 +43,15 @@ class CatProfileViewModel @Inject constructor(): ViewModel() {
                 weight.value = cat.weight.toString()
                 descriptor.value = cat.description_cats
                 image_url.value = cat.image_url
-            }
-            else{
+            } else {
                 Log.d("CatProfileVM", "Начинаем создавать кота")
             }
         }
     }
-    fun SaveChangeCat(controller: NavHostController){
+    fun SaveChangeCat(controller: NavHostController) {
         viewModelScope.launch {
-            if(currentIdCat.value!=0){
+            if (currentIdCat.value!= 0) { //изменяем кота
+                GetCat()
                 try {
                     //изменение кота:
                     val updateCat = Cats(
@@ -64,13 +65,16 @@ class CatProfileViewModel @Inject constructor(): ViewModel() {
                     )
                     val responce = Constants.supabase.from("cats")
                         .update(updateCat) { filter { eq("id", currentIdCat.value) } }
+                    Log.d("CatProfileVM", "Изменяем кота: ${name.value}")
+                    Log.d("CatProfileVM", "ID кота: ${currentIdCat.value}")
+                } catch (e: Exception) {
+                    Log.d(
+                        "CatProfileVM",
+                        "Не удалось сохранить изменения: ${e.message.toString()}"
+                    )
                 }
-                catch (e:Exception){
-                    Log.d("CatProfileVM", "Не удалось сохранить изменения: ${e.message.toString()}")
-                }
-            }
-            else{
-                //добавление кота:
+
+            } else { //добавляем
                 try {
                     val cat = Cats(
                         name_cat = name.value,
@@ -82,18 +86,9 @@ class CatProfileViewModel @Inject constructor(): ViewModel() {
                         image_url = ""
                     )
                     //добавляем и получаем объект добавленного кота
-                    val resultCat = Constants.supabase.from("cats").insert(cat)
-                    val catDb = Constants.supabase.from("cats").select {
-                        filter {
-                            eq("name_cat",name.value)
-                            eq("gender_id", gender.value.toInt())
-                            eq("age", age.value.toInt())
-                            eq("breed_id", breed.value.toInt())
-                            eq("weight", weight.value.toInt())
-                            eq("description_cats",descriptor.value )
-                            eq("image_url", "")
-                        }
-                    }.decodeSingle<Cats>()
+                    val catDb = Constants.supabase.from("cats").insert(cat) { select() }
+                        .decodeSingle<Cats>()
+
                     Log.d("CatProfileVM", "Добавляем кота: ${catDb.id}. ${catDb.name_cat}")
                     //создаем объект связи нового кота и пользователя
                     val user_cat = UserCats(
@@ -102,13 +97,16 @@ class CatProfileViewModel @Inject constructor(): ViewModel() {
                     )
                     //добавляем этот объект
                     val ansv = Constants.supabase.from("user_cats").insert(user_cat)
+                } catch (e: Exception) {
+                    Log.d(
+                        "CatProfileVM",
+                        "Не удалось добавить изменения: ${e.message.toString()}"
+                    )
                 }
-                catch (e:Exception){
-                    Log.d("CatProfileVM", "Не удалось добавить изменения: ${e.message.toString()}")
-                }
+
             }
-            controller.navigate(NavigationRoutes.MAINPROFILE){
-                popUpTo(NavigationRoutes.CATPROFILE){
+            controller.navigate(NavigationRoutes.MAINPROFILE) {
+                popUpTo(NavigationRoutes.CATPROFILE) {
                     inclusive = true
                 }
             }

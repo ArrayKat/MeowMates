@@ -23,10 +23,7 @@ import javax.inject.Inject
 class MainProfileViewModel @Inject constructor():ViewModel() {
     var User = mutableStateOf<Users?>(null)
     var catList = mutableStateOf<List<CustomCats>>(emptyList())
-    fun navigateToCatProfile(controller:NavHostController, idCat: Int){
 
-
-    }
     fun navigateToMyProfile(controller:NavHostController){
         controller.navigate(NavigationRoutes.MYPROFILE) {
             popUpTo(NavigationRoutes.MAINPROFILE){
@@ -64,7 +61,7 @@ class MainProfileViewModel @Inject constructor():ViewModel() {
                     val cat = Constants.supabase.from("cats").select {filter {eq("id", it.id_cats)}}.decodeSingle<Cats>()
                     val breedCat = Constants.supabase.from("breeds").select { filter { eq("id", cat.breed_id) } }.decodeSingle<Breeds>()
                     CustomCats(
-                        id = it.id,
+                        id = cat.id,
                         name_cat = cat.name_cat,
                         gender_id = cat.gender_id,
                         age = cat.age,

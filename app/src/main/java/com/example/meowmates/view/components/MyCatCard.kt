@@ -47,7 +47,7 @@ import io.ktor.client.plugins.convertLongTimeoutToIntWithInfiniteAsZero
 
 
 @Composable
-fun MyCatCard(cat: CustomCats,controller: NavHostController, viewModel: CatProfileViewModel= hiltViewModel()) {
+fun MyCatCard(cat: CustomCats, idCatDB:Int, controller: NavHostController, viewModel: MainProfileViewModel= hiltViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -127,11 +127,8 @@ fun MyCatCard(cat: CustomCats,controller: NavHostController, viewModel: CatProfi
                 imageVector = ImageVector.vectorResource(id = R.drawable.edit_icon),
                 contentDescription = "Изменить",
                 modifier = Modifier.size(40.dp).padding(end = 16.dp, top = 16.dp).clickable {
-                   controller.navigate(NavigationRoutes.CATPROFILE + "/${cat.id}"){
-                       popUpTo(NavigationRoutes.MAINPROFILE){
-                           inclusive = true
-                       }
-                   }
+                    Log.d("MyCatCard", "ID: ${idCatDB} name: ${cat.name_cat}")
+                    controller.navigate(NavigationRoutes.CATPROFILE + "/${cat.id}")
                 },
                 tint = MeowMatesTheme.colors.activIcon,
             )
