@@ -78,21 +78,25 @@ dependencies {
 //    val nav_version = "2.7.7"
 //    implementation("androidx.navigation:navigation-compose:$nav_version")
 
-    // hilt
+    // hilt - для упощения управлением зависимостей, делает код более читаемым
     implementation("com.google.dagger:hilt-android:2.52")
     kapt("com.google.dagger:hilt-compiler:2.52")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
-    //supabase
+    //supabase - доступ к данным приложения (БД)
     implementation(platform("io.github.jan-tennert.supabase:bom:3.0.1"))
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:auth-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
+    implementation("io.github.jan-tennert.supabase:storage-kt")
 
-    //supabase ktor
+    //supabase ktor - необходимая зависимость для правильного функционирования
     implementation("io.ktor:ktor-client-android:3.0.0")
     implementation ("io.ktor:ktor-client-core: 3.0.0")
     implementation ("io.ktor:ktor-utils: 3.0.0")
+
+
     //coil - для вывода изображений по url
     implementation("io.coil-kt:coil-compose:2.0.0")
+    //
 }

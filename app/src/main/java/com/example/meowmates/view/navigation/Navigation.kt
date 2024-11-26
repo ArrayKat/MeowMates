@@ -2,18 +2,22 @@ package com.example.meowmates.view.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.meowmates.domain.utils.Constants
+import com.example.meowmates.model.database.Users
 import com.example.meowmates.view.screens.favorites.Favorites
 import com.example.meowmates.view.screens.home.Home
 import com.example.meowmates.view.screens.logIn.LogIn
-import com.example.meowmates.view.screens.message.Message
+import com.example.meowmates.view.screens.message.Chat.Chat
 import com.example.meowmates.view.screens.profile.cat.CatProfile
 import com.example.meowmates.view.screens.profile.main.MainProfile
 import com.example.meowmates.view.screens.profile.people.MyProfile
 import com.example.meowmates.view.screens.signUp.SignUp
 import com.example.meowmates.view.screens.splash.Splash
+import io.github.jan.supabase.postgrest.from
 
 @Composable
 fun Navigation(controller: NavHostController, isVisibleBar: MutableState<Boolean>) {
@@ -58,7 +62,7 @@ fun Navigation(controller: NavHostController, isVisibleBar: MutableState<Boolean
         }
         composable(NavigationRoutes.MESSAGE) {
             isVisibleBar.value = true
-            Message(controller)
+            Chat(controller,"f6096152-745d-4254-96fe-143960c5edcb", "e1222032-9226-40fd-bece-900f8bd7a29b")
         }
     }
 }

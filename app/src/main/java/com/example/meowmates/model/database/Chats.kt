@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Chats (
     val id: Int =0,
-    val creation_date: DateTimeUnit.DateBased
+    val first_user:String,
+    val second_user:String
 )

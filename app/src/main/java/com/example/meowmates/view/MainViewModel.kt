@@ -3,10 +3,12 @@ package com.example.meowmates.view
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.meowmates.domain.utils.Constants
 import com.example.meowmates.domain.utils.PrefManager.currentUser
 import com.example.meowmates.model.database.Cats
 import com.example.meowmates.model.database.UserFavoriteCat
+import com.example.meowmates.model.database.Users
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
@@ -44,5 +46,6 @@ class MainViewModel @Inject constructor(): ViewModel() {
             }
         }
     }
+
 
 }
