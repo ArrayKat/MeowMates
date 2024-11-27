@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -118,12 +119,13 @@ fun ProfileImage(viewModel: MyProfileViewModel){
         )
     }
     if(imageState is AsyncImagePainter.State.Error) {
-        Box(
-            modifier = Modifier.size(100.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
+        Image(
+            painter = painterResource(id = R.drawable.user_picture_defult_black),
+            contentDescription = "Изображение пользователя",
+            modifier = Modifier.padding(25.dp).fillMaxWidth(),
+            contentScale = ContentScale.Crop,
+        )
+
     }
 
 }

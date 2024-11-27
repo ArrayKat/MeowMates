@@ -24,8 +24,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,6 +36,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
+import com.example.meowmates.R
 import com.example.meowmates.view.components.CatCard
 import com.example.meowmates.view.components.CustomTextField
 import com.example.meowmates.view.screens.profile.people.MyProfileViewModel
@@ -64,7 +67,13 @@ fun CatProfile(navHostController: NavHostController, IdCat : Int, viewModel: Cat
                 LaunchedEffect(Unit) {
                     viewModel.GetCat()
                 }
-                ProfileImage(viewModel)
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(top = 20.dp, bottom = 15.dp),
+                    contentAlignment = Alignment.BottomCenter
+                ){
+
+                    ProfileImage(viewModel)
+                }
             }
             item {
                 CustomTextField(
@@ -121,12 +130,19 @@ fun ProfileImage(viewModel: CatProfileViewModel){
         )
     }
     if(imageState is AsyncImagePainter.State.Error) {
+
         Box(
-            modifier = Modifier.size(100.dp),
-            contentAlignment = Alignment.Center
+            modifier = Modifier.size(335.dp).fillMaxWidth().clip(
+                RoundedCornerShape(15.dp)).background(MeowMatesTheme.colors.container ),
         ) {
-            CircularProgressIndicator()
+            Image(
+                painter = painterResource(id = R.drawable.cat_icon_default),
+                contentDescription = "Изображение кота",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+            )
         }
+
     }
 
 }

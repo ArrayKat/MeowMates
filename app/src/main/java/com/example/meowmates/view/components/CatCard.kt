@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -70,11 +72,16 @@ fun CatCard(cat: CustomCats, viewModel: MainViewModel = hiltViewModel()) {
                 }
                 else -> {
                     Box(
-                        modifier = Modifier.size(100.dp),
-                        contentAlignment = Alignment.Center
+                        modifier = Modifier.size(120.dp).fillMaxWidth().background(MeowMatesTheme.colors.container ),
+                        contentAlignment = Alignment.BottomCenter
                     ) {
-                        CircularProgressIndicator()
+                        Image(
+                            painter = painterResource(id = R.drawable.cat_icon_default),
+                            contentDescription = "Изображение кота",
+                            modifier = Modifier.size(100.dp).fillMaxSize()
+                        )
                     }
+
                 }
             }
 

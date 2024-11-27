@@ -1,4 +1,4 @@
-package com.example.meowmates.view.converterBitmap
+package com.example.meowmates.view.converter
 
 import android.content.Context
 import android.graphics.Bitmap

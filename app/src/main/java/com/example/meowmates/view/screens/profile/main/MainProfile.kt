@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -81,12 +82,16 @@ fun MainProfile(controller: NavHostController, viewModel: MainProfileViewModel =
                         )
                     }
                     else -> {
-                        Box(
-                            modifier = Modifier.size(100.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            CircularProgressIndicator()
-                        }
+
+                        Image(
+                            painter = painterResource(id = R.drawable.user_picture_defult_black),
+                            contentDescription = "Изображение пользователя",
+                            modifier = Modifier.padding(25.dp).fillMaxWidth().clickable {
+
+                            },
+                            contentScale = ContentScale.Crop,
+                        )
+
                     }
                 }
 
