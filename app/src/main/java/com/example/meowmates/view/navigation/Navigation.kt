@@ -11,7 +11,7 @@ import com.example.meowmates.model.database.Users
 import com.example.meowmates.view.screens.favorites.Favorites
 import com.example.meowmates.view.screens.home.Home
 import com.example.meowmates.view.screens.logIn.LogIn
-import com.example.meowmates.view.screens.message.Chat.Chat
+import com.example.meowmates.view.screens.message.ListChats.Chat
 import com.example.meowmates.view.screens.profile.cat.CatProfile
 import com.example.meowmates.view.screens.profile.main.MainProfile
 import com.example.meowmates.view.screens.profile.people.MyProfile
@@ -23,7 +23,7 @@ import io.github.jan.supabase.postgrest.from
 fun Navigation(controller: NavHostController, isVisibleBar: MutableState<Boolean>) {
     NavHost(
         navController = controller,
-        startDestination = NavigationRoutes.LOGIN
+        startDestination = NavigationRoutes.SPLASH
     ) {
         composable(NavigationRoutes.SPLASH) {
             isVisibleBar.value = false
@@ -62,7 +62,7 @@ fun Navigation(controller: NavHostController, isVisibleBar: MutableState<Boolean
         }
         composable(NavigationRoutes.MESSAGE) {
             isVisibleBar.value = true
-            Chat(controller,"f6096152-745d-4254-96fe-143960c5edcb", "e1222032-9226-40fd-bece-900f8bd7a29b")
+            Chat(navHostController = controller)
         }
     }
 }
