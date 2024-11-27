@@ -1,5 +1,6 @@
 package com.example.meowmates.view.screens.logIn
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -42,7 +43,7 @@ import com.example.meowmates.view.ui.theme.MeowMatesTheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
-fun LogIn (navHostController: NavHostController, viewModel: LogInViewModel = hiltViewModel()) {
+fun LogIn (navHostController: NavHostController, context:Context, viewModel: LogInViewModel = hiltViewModel()) {
     var passwordVisible = remember { mutableStateOf(false) }
     //var passwordVisibility: Boolean by remember { mutableStateOf(false) }
     Box(
@@ -124,7 +125,7 @@ fun LogIn (navHostController: NavHostController, viewModel: LogInViewModel = hil
                 )
 
                 Button(
-                    onClick={ viewModel.LogIn(navHostController) },
+                    onClick={ viewModel.LogIn(navHostController, context) },
                     modifier=Modifier
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp))

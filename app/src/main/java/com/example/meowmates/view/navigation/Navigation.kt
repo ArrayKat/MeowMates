@@ -2,6 +2,7 @@ package com.example.meowmates.view.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -25,17 +26,20 @@ fun Navigation(controller: NavHostController, isVisibleBar: MutableState<Boolean
         navController = controller,
         startDestination = NavigationRoutes.SPLASH
     ) {
+
         composable(NavigationRoutes.SPLASH) {
             isVisibleBar.value = false
             Splash(controller)
         }
         composable(NavigationRoutes.SIGNUP) {
             isVisibleBar.value = false
-            SignUp(controller)
+            val context = LocalContext.current
+            SignUp(controller, context)
         }
         composable(NavigationRoutes.LOGIN) {
             isVisibleBar.value = false
-            LogIn(controller)
+            val context = LocalContext.current
+            LogIn(controller,context)
         }
         composable(NavigationRoutes.MAINPROFILE) {
             isVisibleBar.value = true

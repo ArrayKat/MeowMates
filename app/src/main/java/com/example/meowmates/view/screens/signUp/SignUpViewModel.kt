@@ -39,22 +39,23 @@ class SignUpViewModel @Inject constructor(): ViewModel() {
     val emailUser = mutableStateOf("")
     var passwordUser = mutableStateOf("")
 
-    fun signUp(controller: NavHostController){
+    fun signUp(controller: NavHostController, context: Context){
         if(surname.value!="" && name.value!=""
             && patro.value!="" && telephone.value!=""
             && emailUser.value!="" && passwordUser.value!="" && birthdate.value!=""
             ) {
             viewModelScope.launch {
                 try {
-                    var user = Constants.supabase.auth.signUpWith(Email) {
+                    Constants.supabase.auth.signUpWith(Email) {
                         email = emailUser.value
                         password = passwordUser.value
                     }
-                    Log.d("sign up", "Был зарегестрирован слелдующий пользователь: ${user!!.id}")
-                    Log.d("sign up", "Пользователь: ${Constants.supabase.auth.currentUserOrNull()!!.id}")
+                    val user = Constants.supabase.auth.currentUserOrNull()
+                        if(user != null) {
+                        Log.d("sign up", "Был зарегистрирован следующий пользователь: ${user.id}")
+                        Log.d("sign up", "Пользователь: ${Constants.supabase.auth.currentUserOrNull()!!.id}")
 
-                    try{
-                        var newUser = Users(
+                        val newUser = Users(
                             id = user.id,
                             surname = surname.value,
                             name = name.value,
@@ -62,31 +63,29 @@ class SignUpViewModel @Inject constructor(): ViewModel() {
                             birthday = birthdate.value,
                             image_url = "",
                             telephone = telephone.value
-
                         )
                         var result = Constants.supabase.from("users").insert(newUser)
                         currentUser = Constants.supabase.auth.currentUserOrNull()?.id
                         Log.d("sign up","Success")
                         Log.d("sign up", currentUser.toString())
+                        Toast.makeText(context, "Регистрация прошла успешно", Toast.LENGTH_SHORT).show()
                         controller.navigate(NavigationRoutes.HOME){
                             popUpTo(NavigationRoutes.SIGNUP){
                                 inclusive = true
                             }
                         }
-                    }
-                    catch (e:Exception){
-                        Log.d("sign up", "ERROR: Регистрация не прошла!")
-                    }
 
+                    }
                 } catch (e: Exception) {
                     Log.d("sign up", "ERROR: ${e.message.toString()}")
-
+                    Toast.makeText(context, "Произошла ошибка: ${e.message.toString()}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
         else{
             //Toast.makeText(context, "Не все поля заполненны", Toast.LENGTH_SHORT).show()
             Log.d("sign up", "Не все поля заполненны")
+            Toast.makeText(context, "Не все поля заполненны", Toast.LENGTH_SHORT).show()
         }
 
     }

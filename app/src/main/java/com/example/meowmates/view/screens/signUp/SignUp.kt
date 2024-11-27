@@ -1,5 +1,6 @@
 package com.example.meowmates.view.screens.signUp
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -35,7 +36,7 @@ import com.example.meowmates.view.ui.theme.MeowMatesTheme
 
 
 @Composable
-fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = hiltViewModel()) {
+fun SignUp (navHostController: NavHostController, context: Context, viewModel: SignUpViewModel = hiltViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -181,7 +182,7 @@ fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = h
                     ),
                 )
                 Button(
-                    onClick={ viewModel.signUp(navHostController) },
+                    onClick={ viewModel.signUp(navHostController,context) },
                     modifier=Modifier
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .fillMaxWidth() // Занять всю ширину, как текстовые поля

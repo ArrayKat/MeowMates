@@ -123,7 +123,6 @@ fun CatCard(cat: CustomCats, viewModel: MainViewModel = hiltViewModel()) {
                 contentDescription = "Добавить в избранное",
                 modifier = Modifier.size(40.dp).padding(end = 16.dp, top = 16.dp).clickable {
                     viewModel.LikeCat(cat.id, isFavorite.value)
-
                 },
                 tint = MeowMatesTheme.colors.activIcon,
             )
