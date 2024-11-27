@@ -20,16 +20,6 @@ class LogInViewModel @Inject constructor(): ViewModel(){
     val emailUser = mutableStateOf("")
     val passwordUser = mutableStateOf("")
 
-
-
-    fun toPageHome(controller: NavHostController){
-        controller.navigate(NavigationRoutes.HOME) {
-            popUpTo(NavigationRoutes.SPLASH){
-                inclusive = true;
-            }
-        }
-    }
-
     fun LogIn(controller: NavHostController){
         viewModelScope.launch {
             try{
@@ -37,7 +27,7 @@ class LogInViewModel @Inject constructor(): ViewModel(){
                     email = emailUser.value
                     password = passwordUser.value
                 }
-                currentUser = Constants.supabase.auth.currentUserOrNull()?.id
+                //currentUser = Constants.supabase.auth.currentUserOrNull()?.id
                 Log.d("log in","Success")
                 Log.d("log in", currentUser.toString())
                 controller.navigate(NavigationRoutes.HOME){

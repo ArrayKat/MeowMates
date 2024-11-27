@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.example.meowmates.domain.utils.Constants
+import com.example.meowmates.domain.utils.PrefManager.currentUser
 import com.example.meowmates.model.database.Users
 import com.example.meowmates.view.navigation.NavigationRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,45 +42,45 @@ class SignUpViewModel @Inject constructor(): ViewModel() {
     fun signUp(controller: NavHostController){
         if(surname.value!="" && name.value!=""
             && patro.value!="" && telephone.value!=""
-            && emailUser.value!="" && passwordUser.value!=""
+            && emailUser.value!="" && passwordUser.value!="" && birthdate.value!=""
             ) {
             viewModelScope.launch {
                 try {
-                    val responce = Constants.supabase.auth.signUpWith(Email) {
+                    var user = Constants.supabase.auth.signUpWith(Email) {
                         email = emailUser.value
                         password = passwordUser.value
                     }
-                    val user = Constants.supabase.auth.currentUserOrNull()
-                    if (user != null) {
-                        val newUser = Users(
+                    Log.d("sign up", "Был зарегестрирован слелдующий пользователь: ${user!!.id}")
+                    Log.d("sign up", "Пользователь: ${Constants.supabase.auth.currentUserOrNull()!!.id}")
+
+                    try{
+                        var newUser = Users(
                             id = user.id,
                             surname = surname.value,
                             name = name.value,
                             patronymic = patro.value,
                             birthday = birthdate.value,
+                            image_url = "",
+                            telephone = telephone.value
+
                         )
-                        Constants.supabase.from("users").insert(newUser)
-                        Log.d("sign up", "Успех")
-//                        // Проверка на существующего пользователя
-//                        val existingUser = Constants.supabase.from("users").select {
-//                            filter {
-//                                eq("id", newUser.id)
-//                            }
-//                        }.decodeSingle<Users>()
-//                        if (existingUser == null) {
-//                            Constants.supabase.from("users").insert(newUser)
-//                            Log.d("sign up", "Успех")
-//                        } else {
-//                            Log.d("sign up", "Пользователь уже существует")
-//                        }
-                    }else {
-                        //Toast.makeText(, "Не предвиденная ошибка", Toast.LENGTH_SHORT).show()
-                        Log.d("sign up", "Не предвиденная ошибка")
+                        var result = Constants.supabase.from("users").insert(newUser)
+                        currentUser = Constants.supabase.auth.currentUserOrNull()?.id
+                        Log.d("sign up","Success")
+                        Log.d("sign up", currentUser.toString())
+                        controller.navigate(NavigationRoutes.HOME){
+                            popUpTo(NavigationRoutes.SIGNUP){
+                                inclusive = true
+                            }
+                        }
+                    }
+                    catch (e:Exception){
+                        Log.d("sign up", "ERROR: Регистрация не прошла!")
                     }
 
-
                 } catch (e: Exception) {
-                    Log.d("sign up", e.message.toString())
+                    Log.d("sign up", "ERROR: ${e.message.toString()}")
+
                 }
             }
         }
