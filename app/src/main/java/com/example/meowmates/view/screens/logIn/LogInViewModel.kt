@@ -48,6 +48,7 @@ class LogInViewModel @Inject constructor(): ViewModel(){
                 Toast.makeText(context, "Авторизация прошла успешно", Toast.LENGTH_SHORT).show()
                 Log.d("log in","Success")
                 Log.d("log in", currentUser.toString())
+                state = ResultStateSignIn.Success("Success")
                 controller.navigate(NavigationRoutes.HOME){
                     popUpTo(NavigationRoutes.LOGIN){
                         inclusive = true
@@ -58,6 +59,7 @@ class LogInViewModel @Inject constructor(): ViewModel(){
             catch(e:Exception){
                 Log.d("log in",e.message.toString())
                 Toast.makeText(context, "Возникла ошибка входа: ${e.message.toString()}", Toast.LENGTH_SHORT).show()
+                state = ResultStateSignIn.Error(e.message.toString())
                 //_logInState.value = ResultLogIn.Error(e.message ?: "Unknown error")
             }
         }

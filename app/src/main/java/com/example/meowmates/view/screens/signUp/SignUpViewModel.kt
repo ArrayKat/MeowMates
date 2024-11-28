@@ -20,6 +20,7 @@ import com.example.meowmates.domain.utils.Constants
 import com.example.meowmates.domain.utils.PrefManager.currentUser
 import com.example.meowmates.model.database.Users
 import com.example.meowmates.view.navigation.NavigationRoutes
+import com.example.meowmates.view.screens.logIn.ResultStateSignIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.jan.supabase.auth.auth
@@ -38,6 +39,13 @@ class SignUpViewModel @Inject constructor(): ViewModel() {
     val birthdate = mutableStateOf("")
     val emailUser = mutableStateOf("")
     var passwordUser = mutableStateOf("")
+
+    private var _state = mutableStateOf<ResultSignUp>(ResultSignUp.Loading)
+    var state: ResultSignUp
+        get() = _state.value
+        set(value) {
+            _state.value = value
+        }
 
     fun signUp(controller: NavHostController, context: Context){
         if(surname.value!="" && name.value!=""
@@ -68,6 +76,7 @@ class SignUpViewModel @Inject constructor(): ViewModel() {
                         currentUser = Constants.supabase.auth.currentUserOrNull()?.id
                         Log.d("sign up","Success")
                         Log.d("sign up", currentUser.toString())
+                        state = ResultSignUp.Success("Success")
                         Toast.makeText(context, "Регистрация прошла успешно", Toast.LENGTH_SHORT).show()
                         controller.navigate(NavigationRoutes.HOME){
                             popUpTo(NavigationRoutes.SIGNUP){
@@ -79,6 +88,7 @@ class SignUpViewModel @Inject constructor(): ViewModel() {
                 } catch (e: Exception) {
                     Log.d("sign up", "ERROR: ${e.message.toString()}")
                     Toast.makeText(context, "Произошла ошибка: ${e.message.toString()}", Toast.LENGTH_SHORT).show()
+                    state = ResultSignUp.Error(e.message.toString())
                 }
             }
         }

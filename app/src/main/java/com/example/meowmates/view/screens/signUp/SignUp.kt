@@ -11,10 +11,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 
 
@@ -22,21 +25,30 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.meowmates.R
 import com.example.meowmates.view.navigation.NavigationRoutes
 import com.example.meowmates.view.ui.theme.MeowMatesTheme
 
 
 @Composable
-fun SignUp (navHostController: NavHostController, context: Context, viewModel: SignUpViewModel = hiltViewModel()) {
+fun SignUp (navHostController: NavHostController, viewModel: SignUpViewModel = hiltViewModel()) {
+    var passwordVisible = remember { mutableStateOf(false) }
+    val context = LocalContext.current
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -165,12 +177,13 @@ fun SignUp (navHostController: NavHostController, context: Context, viewModel: S
                         fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
                     ),
                 )
+
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp, horizontal = 20.dp)
                         .background(MeowMatesTheme.colors.container, shape = RoundedCornerShape(10.dp)),
-                    placeholder = { Text("Пароль", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
+                    placeholder = { Text(text = "Пароль", color = MeowMatesTheme.colors.text, style = MeowMatesTheme.fonts.textWatermark) },
                     value = viewModel.passwordUser.value,
                     onValueChange = {newStr -> viewModel.passwordUser.value = newStr},
                     shape = RoundedCornerShape(10.dp),
@@ -180,6 +193,19 @@ fun SignUp (navHostController: NavHostController, context: Context, viewModel: S
                         fontWeight = MeowMatesTheme.fonts.textWatermark.fontWeight, // Жирность шрифта
                         fontSize = MeowMatesTheme.fonts.textWatermark.fontSize
                     ),
+                    visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+                        val icon = if (passwordVisible.value) {
+                            ImageVector.vectorResource(id = R.drawable.eye_open_icon)
+
+                        } else {
+                            ImageVector.vectorResource(id = R.drawable.eye_closed_icon)
+                        }
+                        IconButton(onClick = { passwordVisible.value = !passwordVisible.value }) {
+                            Icon(imageVector = icon, contentDescription = null, tint = MeowMatesTheme.colors.activIcon, modifier = Modifier.size(30.dp).padding(end = 5.dp))
+                        }
+                    }
+
                 )
                 Button(
                     onClick={ viewModel.signUp(navHostController,context) },

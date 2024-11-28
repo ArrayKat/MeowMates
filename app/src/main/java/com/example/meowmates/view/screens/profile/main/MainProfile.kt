@@ -1,5 +1,9 @@
 package com.example.meowmates.view.screens.profile.main
 
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -46,14 +50,40 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.example.meowmates.R
+import com.example.meowmates.domain.utils.Constants
 import com.example.meowmates.view.components.CatCard
 import com.example.meowmates.view.components.MyCatCard
+import com.example.meowmates.view.converter.bitmapToByteArray
 import com.example.meowmates.view.navigation.NavigationRoutes
 import com.example.meowmates.view.ui.theme.MeowMatesTheme
+import io.github.jan.supabase.storage.storage
+import io.github.jan.supabase.storage.upload
+import androidx.activity.compose.rememberLauncherForActivityResult as rememberLauncherForActivityResult
 
 
 @Composable
 fun MainProfile(controller: NavHostController, viewModel: MainProfileViewModel = hiltViewModel()) {
+    val context = LocalContext.current
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia()) { uri ->
+        if(uri==null){
+            Toast.makeText(context, "Вы не выбрали картинку", Toast.LENGTH_SHORT).show()
+            return@rememberLauncherForActivityResult
+        }
+        else{
+            //добавление выбранной картинки в супабейз
+            try{
+                var byteArr = bitmapToByteArray(context,uri)
+                viewModel.addPictureSupa("myIcon","users", byteArr)
+                Log.d("MainProfile", "Картинка упешно загружена")
+            }
+            catch (e:Exception){
+                Log.d("MainProfile", "ОШИБКА добавления картинки: ${e.message.toString()}")
+            }
+        }
+
+    }
+
     LazyColumn(
         modifier = Modifier
             .background(MeowMatesTheme.colors.background)
@@ -87,7 +117,7 @@ fun MainProfile(controller: NavHostController, viewModel: MainProfileViewModel =
                             painter = painterResource(id = R.drawable.user_picture_defult_black),
                             contentDescription = "Изображение пользователя",
                             modifier = Modifier.padding(25.dp).fillMaxWidth().clickable {
-
+                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             },
                             contentScale = ContentScale.Crop,
                         )

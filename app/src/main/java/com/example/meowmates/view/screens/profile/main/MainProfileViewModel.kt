@@ -1,6 +1,10 @@
 package com.example.meowmates.view.screens.profile.main
 
+import android.content.Context
+import android.net.Uri
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,10 +16,12 @@ import com.example.meowmates.model.database.Breeds
 import com.example.meowmates.model.database.Cats
 import com.example.meowmates.model.database.UserCats
 import com.example.meowmates.model.database.Users
+import com.example.meowmates.view.converter.bitmapToByteArray
 import com.example.meowmates.view.navigation.NavigationRoutes
 import com.example.meowmates.view.screens.profile.cat.CatProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.storage.storage
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -79,6 +85,31 @@ class MainProfileViewModel @Inject constructor():ViewModel() {
             }
         }
 
+    }
+    fun addPictureSupa(fileName:String,bucketName:String, byteArr:ByteArray){
+        viewModelScope.launch {
+            try{
+                val bucket = Constants.supabase.storage[bucketName]
+                bucket.upload("${fileName}.jpg", byteArr){ upsert = true}
+                Log.d("MainProfileVM", "Файл загружен!!!")
+            }
+            catch (e: Exception){
+                Log.d("MainProfileVM", "ОШИБКА: что то не так с загрузкой файла в supabase: ${e.message.toString()}")
+            }
+        }
+    }
+    fun createBucket(name: String) {
+        viewModelScope.launch {
+            try {
+               Constants.supabase.storage.createBucket(id = name){
+                    public = false
+                    fileSizeLimit = 10.megabytes
+               }
+                Log.d("MainProfileVM", "Корзина создалась")
+            } catch(e: Exception) {
+                Log.d("MainProfileVM", "ОШИБКА не создалась корзина: ${e.message.toString()}")
+            }
+        }
     }
 
 

@@ -34,7 +34,7 @@ fun Navigation(controller: NavHostController, isVisibleBar: MutableState<Boolean
         composable(NavigationRoutes.SIGNUP) {
             isVisibleBar.value = false
             val context = LocalContext.current
-            SignUp(controller, context)
+            SignUp(controller)
         }
         composable(NavigationRoutes.LOGIN) {
             isVisibleBar.value = false

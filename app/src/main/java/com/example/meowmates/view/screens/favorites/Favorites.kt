@@ -26,7 +26,14 @@ fun Favorites (navHostController: NavHostController, viewModel: FavoritesViewMod
             .background(MeowMatesTheme.colors.background)
             .fillMaxSize()
     ) {
-        LazyColumn(modifier = Modifier.padding( bottom = 100.dp, start = 16.dp, end = 16.dp, top = 50.dp )) {
+        Text(
+            text = "Избранное",
+            color = MeowMatesTheme.colors.title,
+            style = MeowMatesTheme.fonts.textWatermark,
+            fontSize = 30.sp,
+            modifier = Modifier.padding(top = 20.dp, start = 20.dp)
+        )
+        LazyColumn(modifier = Modifier.padding( bottom = 100.dp, start = 16.dp, end = 16.dp, top = 65.dp )) {
             if(cats.isEmpty()){
                 item {
                     Text(
