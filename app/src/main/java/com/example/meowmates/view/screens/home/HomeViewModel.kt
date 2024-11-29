@@ -28,6 +28,7 @@ class HomeViewModel @Inject constructor():ViewModel() {
     var catsList = mutableStateOf<List<CustomCats>>(emptyList())
     var breedsList = mutableStateOf<List<Breeds>>(emptyList())
     var favoriteCatList = mutableStateOf<List<UserFavoriteCat>>(emptyList())
+
     init{
         GetComponent()
     }

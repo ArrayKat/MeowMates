@@ -85,7 +85,7 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun authScreenIsDisplayed() {
+    fun regScreenIsDisplayed() {
         scenario.onActivity {
             it.setContent {
                 signUpViewModel = SignUpViewModel()
@@ -97,7 +97,7 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun authScreenButtonIsEnabled() {
+    fun regScreenButtonIsEnabled() {
         scenario.onActivity {
             it.setContent {
                 signUpViewModel = SignUpViewModel()
